@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistencia Estudiantil - QR</title>
+    <!-- Cargamos la librería para el escáner -->
+    <script src="https://unpkg.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .container { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        h1 { color: #2c3e50; font-size: 24px; }
+        #reader { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
+        #resultado { padding: 15px; background: #e8f4fd; border-radius: 8px; color: #2980b9; font-weight: bold; min-height: 20px; word-break: break-all; }
+        .footer { margin-top: 20px; font-size: 12px; color: #7f8c8d; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Escáner de Estudiantes</h1>
+    <p>Coloca el código QR frente a la cámara</p>
+    
+    <!-- Contenedor donde se mostrará la cámara -->
+    <div id="reader"></div>
+    
+    <div id="resultado">Esperando código...</div>
+    
+    <div class="footer">Requiere conexión HTTPS para activar la cámara</div>
+</div>
+
+<script>
+    // Configuración del escáner
+    const scanner = new Html5QrcodeScanner('reader', { 
+        fps: 10,       // Cuadros por segundo
+        qrbox: 250     // Tamaño del cuadro de escaneo
+    });
+
+    // Función que se ejecuta al detectar un QR con éxito
+    function onScanSuccess(decodedText, decodedResult) {
+        document.getElementById('resultado').innerText = "Escaneado: " + decodedText;
+        console.log("Datos del estudiante:", decodedText);
+        
+        // OPCIONAL: Aquí podrías enviar 'decodedText' a una base de datos
+        // mediante un fetch() a un archivo PHP o una API.
+    }
+
+    // Función en caso de error (opcional)
+    function onScanFailure(error) {
+        // console.warn(`Error de escaneo: ${error}`);
+    }
+
+    // Iniciar el escáner
+    scanner.render(onScanSuccess, onScanFailure);
+</script>
+
+</body>
+</html>
