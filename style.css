@@ -1,0 +1,58 @@
+body{
+  margin:0;
+  font-family:'Segoe UI';
+}
+
+.header{
+  background:#1e293b;
+  color:#fff;
+  padding:12px;
+  text-align:center;
+}
+
+#reader{
+  width:260px;
+  margin:15px auto;
+  border:3px solid #22c55e;
+  border-radius:12px;
+}
+
+.panel{
+  background:#111827;
+  margin:10px;
+  padding:15px;
+  border-radius:12px;
+  color:#fff;
+}
+
+.foto{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  margin:auto;
+  display:none;
+}
+
+.dashboard{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+}
+
+.card{
+  background:#111827;
+  color:#fff;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.asistencia{border-left:5px solid #22c55e;}
+.tardanza{border-left:5px solid #facc15;}
+.falta{border-left:5px solid #ef4444;}
+
+.graficos{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
