@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Escolar</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+<div id="login">
+  <div class="login-box">
+    <h2>🔐 Panel Escolar</h2>
+    <input id="user" placeholder="Usuario">
+    <input id="pass" type="password" placeholder="Contraseña">
+    <button onclick="login()">Ingresar</button>
+  </div>
+</div>
+
+<div id="panel" style="display:none">
+
+<div class="header">📊 Dashboard de Asistencia</div>
+
+<div class="dashboard">
+  <div class="card asistencia">
+    <h3>Asistencia</h3>
+    <h2 id="asis">0</h2>
+  </div>
+
+  <div class="card tardanza">
+    <h3>Tardanza</h3>
+    <h2 id="tard">0</h2>
+  </div>
+
+  <div class="card falta">
+    <h3>Falta</h3>
+    <h2 id="falt">0</h2>
+  </div>
+</div>
+
+<div class="graficos">
+  <canvas id="graficoBarras"></canvas>
+  <canvas id="graficoPastel"></canvas>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Hora</th>
+<th>Estado</th>
+</tr>
+</thead>
+<tbody id="tabla"></tbody>
+</table>
+
+</div>
+
+<script>
+
+const API = "TU_API_AQUI";
+
+let chartBar, chartPie;
+
+function login(){
+  const user = document.getElementById("user").value;
+  const pass = document.getElementById("pass").value;
+
+  if(user==="admin" && pass==="1234"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("panel").style.display="block";
+    cargar();
+  }else{
+    alert("Credenciales incorrectas");
+  }
+}
+
+function cargar(){
+
+fetch(API+"?tipo=panel")
+.then(r=>r.json())
+.then(data=>{
+
+let html="";
+let resumen={ASISTENCIA:0,TARDANZA:0,FALTA:0};
+
+data.reverse().forEach(d=>{
+
+if(resumen[d.estado]!=null) resumen[d.estado]++;
+
+html+=`<tr>
+<td>${d.nombre}</td>
+<td>${d.hora}</td>
+<td>${d.estado}</td>
+</tr>`;
+
+});
+
+document.getElementById("tabla").innerHTML=html;
+document.getElementById("asis").innerHTML=resumen.ASISTENCIA;
+document.getElementById("tard").innerHTML=resumen.TARDANZA;
+document.getElementById("falt").innerHTML=resumen.FALTA;
+
+actualizarGraficos(resumen);
+
+});
+
+}
+
+function actualizarGraficos(r){
+
+const data=[r.ASISTENCIA,r.TARDANZA,r.FALTA];
+
+if(chartBar) chartBar.destroy();
+if(chartPie) chartPie.destroy();
+
+chartBar=new Chart(document.getElementById("graficoBarras"),{
+  type:'bar',
+  data:{
+    labels:['Asistencia','Tardanza','Falta'],
+    datasets:[{data:data}]
+  }
+});
+
+chartPie=new Chart(document.getElementById("graficoPastel"),{
+  type:'pie',
+  data:{
+    labels:['Asistencia','Tardanza','Falta'],
+    datasets:[{data:data}]
+  }
+});
+
+}
+
+setInterval(()=>{
+  if(document.getElementById("panel").style.display==="block"){
+    cargar();
+  }
+},3000);
+
+</script>
+
+</body>
+</html>
