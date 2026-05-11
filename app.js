@@ -6,7 +6,7 @@ let sonido;
 // 🔊 ACTIVAR SONIDO (corregido con enlace directo)
 document.body.addEventListener("click", ()=>{
   if(!sonido){
-    sonido = new Audio("https://drive.google.com/uc?export=download&id=1ech4VhO76WcQtg_yJH8zU-PIUCbQSqiv");
+    sonido = new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
   }
 });
 
