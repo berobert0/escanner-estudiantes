@@ -1,32 +1,3 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://unpkg.com/html5-qrcode"></script>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<div class="header">
-  <h2>I.E. "5074 Alcides Spelucín Vega"</h2>
-  <p>3ro C Nivel Primaria</p>
-  <p>👨‍🏫 Prof. Robert Egúsquiza</p>
-  <p>🕒 7:40 a.m - 12:40 p.m</p>
-</div>
-
-<div id="reader"></div>
-
-<div class="panel">
-  <img id="foto" class="foto">
-  <div id="nombre" class="nombre"></div>
-  <div id="estado" class="estado"></div>
-  <div id="mensaje" class="mensaje"></div>
-</div>
-
-<script src="app.js"></script>
-
-</body>
-</html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Escáner QR | I.E. 5074</title><script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script><link rel="stylesheet" href="style.css"></head>
+<body><header class="header"><div class="school">I.E. N.° 5074 <strong>ALCIDES SPELUCÍN VEGA</strong></div><div class="eyebrow">CONTROL DE ASISTENCIA QR · PRIMARIA</div><h1>Registro de asistencia</h1><section class="teacher-card" aria-label="Datos del usuario"><div class="teacher-avatar">👩‍🏫</div><div><div class="mini">USUARIO RESPONSABLE</div><div id="docenteNombre" class="teacher-name">Cargando datos del panel...</div><div id="docenteSeccion" class="teacher-section">Abre el lector desde el panel institucional</div></div></section><div id="autorizacion" class="auth">Comprobando autorización...</div></header><main><section class="scanner-card"><div class="section-heading"><h2>Escanear carné</h2><span class="live">● LECTOR QR</span></div><p class="hint">Coloca el código QR del estudiante frente a la cámara.</p><div id="reader"></div></section><section class="panel" aria-live="polite"><div class="result-title">RESULTADO DEL ESCANEO</div><img id="foto" class="foto" alt="Foto del estudiante"><div id="nombre" class="nombre"></div><div id="estado" class="estado">ESPERANDO QR</div><div id="mensaje" class="mensaje">La asistencia solo se confirma cuando Google Sheets guarda el registro.</div></section></main><footer>I.E. N.° 5074 · Sistema institucional de asistencia</footer><script src="app.js"></script></body></html>
